@@ -60,9 +60,9 @@
     [self.reachability startNotifier];
     
     // we update real reachability status in the background to not block UI
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.currentNetworkStatus = (FKNetworkStatus)self.reachability.currentReachabilityStatus;
-    });
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //    self.currentNetworkStatus = (FKNetworkStatus)self.reachability.currentReachabilityStatus;
+    //});
 }
 
 - (void)setupReachabilityFor:(id)object {
