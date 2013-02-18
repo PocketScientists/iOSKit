@@ -1,3 +1,3 @@
 [submodule "FoundationKit"]
 	path = FoundationKit
-	url = https://github.com/foundationkit/FoundationKit.git
+	url = git@github.com:PocketScientists/FoundationKit.git
