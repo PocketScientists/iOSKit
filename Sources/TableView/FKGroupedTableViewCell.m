@@ -31,6 +31,24 @@
     [self hideLoadingIndicator];
 }
 
+- (void)setSelected:(BOOL)selected {
+    [self updateSelectionViewPosition];
+
+    [super setSelected:selected];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [self updateSelectionViewPosition];
+
+    [super setSelected:selected animated:animated];
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+    [self updateSelectionViewPosition];
+
+    [super setHighlighted:highlighted];
+}
+
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [self updateSelectionViewPosition];
     
@@ -53,8 +71,14 @@
 
 - (void)updateSelectionViewPosition {
     UITableView *tableView = (UITableView *)self.superview;
-    
+
     [self.selectionView updatePositionForTableView:tableView indexPath:[tableView indexPathForCell:self]];
+}
+
+- (void)updateSelectionViewPositionForIndexPath:(NSIndexPath *)indexPath {
+    UITableView *tableView = (UITableView *)self.superview;
+    
+    [self.selectionView updatePositionForTableView:tableView indexPath:indexPath];
 }
 
 @end

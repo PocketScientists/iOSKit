@@ -17,43 +17,6 @@ FKLoadCategory(UIViewControllerFKAdditions);
     return [self isViewLoaded] && self.view.window != nil;
 }
 
-- (void)displayDebugError:(NSError *)error {
-#ifdef FK_DEBUG
-	if (error == nil) {
-		return;
-	}
-    
-    UIAlertView *alertView = [UIAlertView alertViewWithError:error];
-    [alertView show];
-#endif
-}
-
-- (void)displayDetailedDebugError:(NSError *)error {
-#ifdef FK_DEBUG
-	if (error == nil) {
-		return;
-	}
-    
-    UIAlertView *alertView = [UIAlertView alertViewWithDetailedError:error];
-    [alertView show];
-#endif
-}
-
-- (void)displayDebugErrorString:(NSString *)string {
-#ifdef FK_DEBUG
-	if (string == nil || [string isBlank]) {
-		return;
-	}
-    
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-                                                    message:string 
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"OK" 
-                                          otherButtonTitles:nil];
-	[alert show];
-#endif
-}
-
 - (id)currentVisibleViewController {
     if ([self isKindOfClass:[UITabBarController class]]) {
         UITabBarController *tabBarController = (UITabBarController *)self;
@@ -62,8 +25,30 @@ FKLoadCategory(UIViewControllerFKAdditions);
         UINavigationController *navigationController = (UINavigationController *)self;
         return [[navigationController visibleViewController] currentVisibleViewController];
     }
-    
+
     return self;
+}
+
+- (void)addChildViewController:(UIViewController *)childController andRemoveOldChildViewController:(UIViewController *)oldChildController callAppearanceMethods:(BOOL)callAppearanceMethods {
+    if (childController != oldChildController && childController.parentViewController != self) {
+        // Remove old childVC
+        if (oldChildController != nil) {
+            if (callAppearanceMethods) [oldChildController beginAppearanceTransition:NO animated:NO];
+            [oldChildController willMoveToParentViewController:nil];
+            [oldChildController.view removeFromSuperview];
+            [oldChildController removeFromParentViewController];
+            if (callAppearanceMethods) [oldChildController endAppearanceTransition];
+        }
+
+        // Add new childVC
+        if (childController != nil) {
+            if (callAppearanceMethods) [childController beginAppearanceTransition:YES animated:NO];
+            [self addChildViewController:childController];
+            [self.view addSubview:childController.view];
+            [childController didMoveToParentViewController:self];
+            if (callAppearanceMethods) [childController endAppearanceTransition];
+        }
+    }
 }
 
 @end

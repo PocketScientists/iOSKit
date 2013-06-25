@@ -15,13 +15,6 @@ NS_INLINE CGRect FKRectWithClearedOrigin(CGRect rect) {
 }
 
 /**
- Applys UIEdgeInsets to a CGRect.
- */
-NS_INLINE CGRect FKRectInset(CGRect rect, UIEdgeInsets insets) {
-    return UIEdgeInsetsInsetRect(rect, insets);
-}
-
-/**
  Sets a new value for origin.x, leaves all other values unchanged.
  */
 NS_INLINE CGRect FKRectSetX(CGRect rect, CGFloat x) {
@@ -64,13 +57,6 @@ NS_INLINE CGRect FKRectSetSize(CGRect rect, CGSize size) {
 }
 
 /**
- Translates the origin of a rect by creating a new origin (origin.x+point.x, origin.y+point.y)
- */
-NS_INLINE CGRect FKRectAddPoint(CGRect rect, CGPoint point) {
-	return CGRectMake(rect.origin.x + point.x, rect.origin.y + point.y, rect.size.width, rect.size.height);
-}
-
-/**
  Returns the center-point of a CGRect
  */
 NS_INLINE CGPoint FKRectCenter(CGRect rect) {
@@ -86,15 +72,10 @@ NS_INLINE CGPoint FKRectCenter(CGRect rect) {
  */
 NS_INLINE CGSize FKSizeAspectScaleToSize(CGSize size, CGSize toSize) {
 	CGFloat aspect = 1.f;
-    
-	if (size.width > toSize.width) {
-		aspect = toSize.width / size.width;
-	}
-    
-	if (size.height > toSize.height) {
-		aspect = MIN(toSize.height / size.height, aspect);
-	}
-    
+
+	aspect = toSize.width / size.width;
+	aspect = MIN(toSize.height / size.height, aspect);
+
 	return CGSizeMake(size.width * aspect, size.height * aspect);
 }
 
@@ -159,4 +140,36 @@ NS_INLINE CGAffineTransform FKRotationTransformForOrientation(UIInterfaceOrienta
     } else {
         return CGAffineTransformIdentity;
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Rubber-Band simulation
+////////////////////////////////////////////////////////////////////////
+
+/**
+ Simulates the UIScrollView rubber-band effect.
+ x = (1.0 - (1.0 / ((x * c / d) + 1.0))) * d
+ 
+ @param distanceWithoutRubberBand distance that can be moved without applying rubber-band effect
+ @param distance  x: distance, from the edge.
+ @param dimension d: dimension, either width or height.
+ @param constant  c: constant, UIScrollView uses 0.55.
+
+ https://twitter.com/chpwn/status/285540192096497664
+ https://twitter.com/chpwn/status/285540396484923393
+ */
+__attribute__((overloadable)) NS_INLINE CGFloat FKRubberBandTranslation(CGFloat distanceWithoutRubberBand, CGFloat distance, CGFloat dimension, CGFloat constant) {
+    if (distance <= distanceWithoutRubberBand) {
+        return distance;
+    }
+
+    return distanceWithoutRubberBand + (1.f - (1.f / (((distance-distanceWithoutRubberBand) * constant / dimension) + 1.f))) * dimension;
+}
+
+__attribute__((overloadable)) NS_INLINE CGFloat FKRubberBandTranslation(CGFloat distanceWithoutRubberBand, CGFloat distance, CGFloat dimension) {
+    return FKRubberBandTranslation(distanceWithoutRubberBand, distance, dimension, 0.55f);
+}
+
+__attribute__((overloadable)) NS_INLINE CGFloat FKRubberBandTranslation(CGFloat distance, CGFloat dimension) {
+    return FKRubberBandTranslation(0.f, distance, dimension);
 }

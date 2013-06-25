@@ -384,17 +384,37 @@
         [button addTarget:self action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
 
         self.loadItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.loadItem.enabled = ![self.address isEqualToString:@"about:blank"];
     }
 
     UIBarButtonItem *fixedSpaceItem = [UIBarButtonItem spaceItemWithWidth:kFKBrowserFixedSpaceItemWidth];
     UIBarButtonItem *flexibleSpaceItem = [UIBarButtonItem flexibleSpaceItem];
 
-    if (self.hasToolbar) {
-        self.toolbar.items = @[fixedSpaceItem, self.backItem, flexibleSpaceItem, self.forwardItem, flexibleSpaceItem,
-                                    self.loadItem, flexibleSpaceItem, self.actionItem, fixedSpaceItem];
+    BOOL showItems = ![self.address isEqualToString:@"about:blank"] || self.customActions.count > 0;
+
+    if (showItems) {
+        if (self.hasToolbar) {
+            NSMutableArray *items = [NSMutableArray arrayWithArray:@[fixedSpaceItem, self.backItem, flexibleSpaceItem, self.forwardItem, flexibleSpaceItem, self.loadItem, flexibleSpaceItem]];
+            [items addObject:self.actionItem];
+            [items addObject:fixedSpaceItem];
+            self.toolbar.items = items;
+        } else {
+            UIBarButtonItem *widerFixedSpaceItem = [UIBarButtonItem spaceItemWithWidth:35.f];
+            NSMutableArray *items = [NSMutableArray arrayWithArray:@[self.loadItem, widerFixedSpaceItem,
+                                     self.forwardItem, widerFixedSpaceItem,
+                                     self.backItem, fixedSpaceItem]];
+
+            [items insertObject:widerFixedSpaceItem atIndex:0];
+            [items insertObject:self.actionItem atIndex:0];
+
+            [self.navigationItem setRightBarButtonItems:items];
+        }
     } else {
-        UIBarButtonItem *widerFixedSpaceItem = [UIBarButtonItem spaceItemWithWidth:35.f];
-        [self.navigationItem setRightBarButtonItems:@[self.actionItem, widerFixedSpaceItem, self.loadItem, widerFixedSpaceItem, self.forwardItem, widerFixedSpaceItem, self.backItem, fixedSpaceItem]];
+        if (self.hasToolbar) {
+            self.toolbar.items = nil;
+        } else {
+            self.navigationItem.rightBarButtonItems = nil;
+        }
     }
 }
 
