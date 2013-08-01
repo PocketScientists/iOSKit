@@ -12,7 +12,10 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-	[(FKTableViewCell *)[self superview] drawContentViewInRect:rect highlighted:NO];
+    UIView *v = self;
+    while (v && ![v isKindOfClass:[FKTableViewCell class]]) v = v.superview;
+    
+    [((FKTableViewCell *)v) drawContentViewInRect:rect highlighted:NO];
 }
 
 @end
@@ -28,7 +31,10 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-	[(FKTableViewCell *)[self superview] drawContentViewInRect:rect highlighted:YES];
+    UIView *v = self;
+    while (v && ![v isKindOfClass:[FKTableViewCell class]]) v = v.superview;
+    
+	[((FKTableViewCell *)v) drawContentViewInRect:rect highlighted:YES];
 }
 
 @end

@@ -22,4 +22,12 @@
 
 - (void)removeAllSubviews;
 
+
+- (void)bringToFront;
+- (void)sendToBack;
+- (void)bringOneLevelUp;
+- (void)sendOneLevelDown;
+- (BOOL)isInFront;
+- (BOOL)isAtBack;
+
 @end
