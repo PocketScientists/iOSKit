@@ -16,31 +16,31 @@ CGPoint FKGetMaxPositions(UIScrollView *scrollView);
 
 @implementation UIScrollView (FKContentSize)
 
-- (void)autocalculateContentHeight {
-	[self autocalculateContentHeightWithPadding:kFKDefaultPadding];
+- (void)fkit_autocalculateContentHeight {
+	[self fkit_autocalculateContentHeightWithPadding:kFKDefaultPadding];
 }
 
-- (void)autocalculateContentHeightWithPadding:(CGFloat)padding {
+- (void)fkit_autocalculateContentHeightWithPadding:(CGFloat)padding {
 	CGFloat maxHeight = FKGetMaxPositions(self).y;
     
     self.contentSize = CGSizeMake(self.bounds.size.width, maxHeight + padding);
 }
 
-- (void)autocalculateContentWidth {
-    [self autocalculateContentWidthWithPadding:kFKDefaultPadding];
+- (void)fkit_autocalculateContentWidth {
+    [self fkit_autocalculateContentWidthWithPadding:kFKDefaultPadding];
 }
 
-- (void)autocalculateContentWidthWithPadding:(CGFloat)padding {
+- (void)fkit_autocalculateContentWidthWithPadding:(CGFloat)padding {
     CGFloat maxWidth = FKGetMaxPositions(self).x;
     
     self.contentSize = CGSizeMake(maxWidth + padding, self.bounds.size.height);
 }
 
-- (void)autocalculateContentSize {
-    [self autocalculateContentSizeWithPadding:CGSizeMake(kFKDefaultPadding, kFKDefaultPadding)];
+- (void)fkit_autocalculateContentSize {
+    [self fkit_autocalculateContentSizeWithPadding:CGSizeMake(kFKDefaultPadding, kFKDefaultPadding)];
 }
 
-- (void)autocalculateContentSizeWithPadding:(CGSize)padding {
+- (void)fkit_autocalculateContentSizeWithPadding:(CGSize)padding {
     CGPoint maxPositions = FKGetMaxPositions(self);
     
     self.contentSize = CGSizeMake(maxPositions.x+padding.width, maxPositions.y+padding.height); 
@@ -53,9 +53,18 @@ CGPoint FKGetMaxPositions(UIScrollView *scrollView);
 ////////////////////////////////////////////////////////////////////////
 
 BOOL FKViewIsScrollIndicator(UIView *view) {
+    static CGFloat scrollIndicatorWidth = 5.f;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (![UIView instancesRespondToSelector:@selector(snapshotViewAfterScreenUpdates:)]) {
+            scrollIndicatorWidth = 7.f;
+        }
+    });
+
     // TODO: Is there a better way to detect the scrollIndicators?
     if ([view isKindOfClass:[UIImageView class]]) {
-        if (CGRectGetHeight(view.frame) == 7.f || CGRectGetWidth(view.frame) == 7.f) {
+        if (CGRectGetHeight(view.frame) == scrollIndicatorWidth || CGRectGetWidth(view.frame) == scrollIndicatorWidth) {
             id image = [view performSelector:@selector(image)];
             
             if ([image isKindOfClass:NSClassFromString([NSString stringWithFormat:@"_%@Res%@le%@",@"UI", @"izab", @"Image"])]) {
@@ -68,7 +77,7 @@ BOOL FKViewIsScrollIndicator(UIView *view) {
 }
 
 BOOL FKViewUseForAutocalculation(UIView *view) {
-    return view.alpha > 0.f && view.hidden == NO && !FKViewIsScrollIndicator(view) && !view.excludedFromScrollViewAutocalculation;
+    return view.alpha > 0.f && view.hidden == NO && !FKViewIsScrollIndicator(view) && !view.fkit_excludedFromScrollViewAutocalculation;
 }
 
 CGPoint FKGetMaxPositions(UIScrollView *scrollView) {

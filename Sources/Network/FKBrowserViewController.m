@@ -17,19 +17,19 @@
 #define kFKBrowserDefaultBackgroundColor   [UIColor scrollViewTexturedBackgroundColor]
 #define kFKCustomActionTitle               @"kFKCustomActionTitle"
 #define kFKCustomActionBlock               @"kFKCustomActionBlock"
+#define kFKCustomActionDestructive         @"kFKCustomActionDestructive"
 
 
-@interface FKBrowserViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface FKBrowserViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong, readwrite) UIToolbar *toolbar;
 @property (nonatomic, strong, readwrite) UIWebView *webView;
 
-@property (nonatomic, strong) UIBarButtonItem *backItem;
-@property (nonatomic, strong) UIBarButtonItem *forwardItem;
-@property (nonatomic, strong) UIBarButtonItem *loadItem;
-@property (nonatomic, strong) UIBarButtonItem *actionItem;
-
-@property (nonatomic, strong) UIActionSheet *actionSheet;
+@property (nonatomic, readwrite) UIBarButtonItem *backItem;
+@property (nonatomic, readwrite) UIBarButtonItem *forwardItem;
+@property (nonatomic, readwrite) UIBarButtonItem *loadItem;
+@property (nonatomic, readwrite) UIBarButtonItem *actionItem;
+@property (nonatomic, readwrite) UIActionSheet *actionSheet;
 
 @property (nonatomic, strong) NSMutableArray *customActions;
 
@@ -57,24 +57,28 @@
 }
 
 - (id)initWithAddress:(NSString *)address {
+    if (address != nil && ![address hasPrefix:@"http"]) {
+        address = [@"http://" stringByAppendingString:address];
+    }
+
+    return [self initWithURL:[NSURL URLWithString:address]];
+}
+
+- (id)initWithURL:(NSURL *)url {
     if ((self = [super initWithNibName:nil bundle:nil])) {
         _fadeAnimationEnabled = YES;
         _tintColor = kFKBrowserDefaultTintColor;
         _backgroundColor = kFKBrowserDefaultBackgroundColor;
 
         // Initialize toolbar here to make it customizable before view is created
-        if (self.hasToolbar) {
-            _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        }
+        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
+        _toolbar.hidden = !self.hasToolbar;
 
-        [self updateAddress:address];
+        _url = url;
+        _address = url.absoluteString;
     }
 
     return self;
-}
-
-- (id)initWithURL:(NSURL *)url {
-    return [self initWithAddress:[url absoluteString]];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -97,11 +101,9 @@
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
 
-    if (self.hasToolbar) {
-        self.toolbar.frameWidth = self.view.boundsWidth;
-        self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-        [self.view addSubview:self.toolbar];
-    }
+    self.toolbar.frameWidth = self.view.boundsWidth;
+    self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:self.toolbar];
 
     if (self.fadeAnimationEnabled) {
         self.webView.alpha = 0.f;
@@ -110,18 +112,6 @@
     [self layoutForOrientation:$appOrientation];
     [self customize];
 	[self reload];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-
-    self.webView.delegate = nil;
-	self.webView = nil;
-    self.toolbar = nil;
-	self.backItem = nil;
-	self.forwardItem = nil;
-	self.loadItem = nil;
-	self.actionItem = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,12 +150,11 @@
 }
 
 - (void)addActionWithTitle:(NSString *)title block:(dispatch_block_t)block {
-    if (self.customActions == nil) {
-        self.customActions = [NSMutableArray array];
-    }
+    [self addActionWithTitle:title block:block destructive:NO];
+}
 
-    NSDictionary *action = @{kFKCustomActionTitle : title, kFKCustomActionBlock: [block copy]};
-    [self.customActions addObject:action];
+- (void)addDestructiveActionWithTitle:(NSString *)title block:(dispatch_block_t)block {
+    [self addActionWithTitle:title block:block destructive:YES];
 }
 
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)command {
@@ -234,7 +223,14 @@
 
 - (UIBarButtonItem *)backItem {
     if (_backItem == nil) {
-        UIButton *button = [UIButton buttonWithImageNamed:@"iOSKit.bundle/browserBack"];
+        UIImage *image = nil;
+        if ([UIView instancesRespondToSelector:@selector(tintColor)]) {
+            image = [[UIImage imageNamed:@"iOSKit.bundle/browser-back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else {
+            image = [UIImage imageNamed:@"iOSKit.bundle/browser-back-legacy"];
+        }
+
+        UIButton *button = [UIButton fkit_buttonWithImage:image];
         [button addTarget:self.webView action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -247,7 +243,14 @@
 
 - (UIBarButtonItem *)forwardItem {
     if (_forwardItem == nil) {
-        UIButton *button = [UIButton buttonWithImageNamed:@"iOSKit.bundle/browserForward"];
+        UIImage *image = nil;
+        if ([UIView instancesRespondToSelector:@selector(tintColor)]) {
+            image = [[UIImage imageNamed:@"iOSKit.bundle/browser-forward"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else {
+            image = [UIImage imageNamed:@"iOSKit.bundle/browser-forward-legacy"];
+        }
+
+        UIButton *button = [UIButton fkit_buttonWithImage:image];
         [button addTarget:self.webView action:@selector(goForward) forControlEvents:UIControlEventTouchUpInside];
 
         _forwardItem = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -260,10 +263,13 @@
 
 - (UIBarButtonItem *)actionItem {
     if (_actionItem == nil) {
-        UIButton *button = [UIButton buttonWithImageNamed:@"iOSKit.bundle/browserAction"];
-        [button addTarget:self action:@selector(showActionSheet) forControlEvents:UIControlEventTouchUpInside];
-
-        _actionItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        if ([UIView instancesRespondToSelector:@selector(tintColor)]) {
+            _actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)];
+        } else {
+            UIButton *button = [UIButton fkit_buttonWithImageNamed:@"iOSKit.bundle/browser-action"];
+            [button addTarget:self action:@selector(showActionSheet) forControlEvents:UIControlEventTouchUpInside];
+            _actionItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        }
     }
 
     return _actionItem;
@@ -280,7 +286,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [self showLoadingIndicatorInNavigationBar];
+    [self fkit_showLoadingIndicatorInNavigationBar];
     [FKNetworkActivityManager addNetworkUser:self];
 
     [self updateUI];
@@ -288,10 +294,10 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     if (self.fadeAnimationEnabled) {
-        [self.webView fadeIn];
+        [self.webView fkit_fadeIn];
     }
 
-    [self hideLoadingIndicator];
+    [self fkit_hideLoadingIndicator];
     [FKNetworkActivityManager removeNetworkUser:self];
 
     [self updateUI];
@@ -302,7 +308,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self hideLoadingIndicator];
+    [self fkit_hideLoadingIndicator];
     [FKNetworkActivityManager removeNetworkUser:self];
 
     [self updateUI];
@@ -317,21 +323,18 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSInteger customActionsBeginIndex = [MFMailComposeViewController canSendMail] ? 2 : 1;
-
-    if (buttonIndex == 0) {
-        FKInterAppOpenSafari(self.url);
-    } else if (buttonIndex == 1 && [MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-
-        composer.navigationBar.tintColor = self.tintColor;
-        [composer setMailComposeDelegate:self];
-        [composer setMessageBody:self.address isHTML:NO];
-
-        if (composer != nil) {
-            [self presentModalViewController:composer animated:YES];
+    NSInteger customActionsBeginIndex =  0;
+    if ([self hasValidAddress]) {
+        customActionsBeginIndex += 2; // copy link, safari
+        if (FKInterAppChromeIsInstalled()) {
+            customActionsBeginIndex++;
         }
-    } else if (buttonIndex == actionSheet.cancelButtonIndex) {
+        if ([MFMailComposeViewController canSendMail]) {
+            customActionsBeginIndex++;
+        }
+    }
+
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
         // do nothing special
     } else if (buttonIndex >= customActionsBeginIndex) {
         NSDictionary *action = [self.customActions objectAtIndex:(NSUInteger)(buttonIndex - customActionsBeginIndex)];
@@ -340,7 +343,25 @@
         if (block != nil) {
             block();
         }
+    } else if (buttonIndex == 0) {
+        [UIPasteboard generalPasteboard].string = self.address;
+    } else if (buttonIndex == 1) {
+        FKInterAppOpenSafari(self.url);
+    } else if (buttonIndex == 2 && FKInterAppChromeIsInstalled()) {
+        FKInterAppOpenChrome(self.url);
+    } else if ((buttonIndex == 2 && !FKInterAppChromeIsInstalled() && [MFMailComposeViewController canSendMail]) ||
+               (buttonIndex == 3 && FKInterAppChromeIsInstalled() && [MFMailComposeViewController canSendMail])) {
+        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+
+        composer.navigationBar.tintColor = self.tintColor;
+        [composer setMailComposeDelegate:self];
+        [composer setMessageBody:self.address isHTML:NO];
+        if (composer != nil) {
+            [self presentModalViewController:composer animated:YES];
+        }
     }
+
+    self.actionSheet = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -367,9 +388,16 @@
 
 - (void)updateUI {
     if (self.webView.loading) {
-        self.title = _(@"Loading...");
+        self.title = _(@"Loading…");
 
-        UIButton *button = [UIButton buttonWithImageNamed:@"iOSKit.bundle/browserStop"];
+        UIImage *image = nil;
+        if ([UIView instancesRespondToSelector:@selector(tintColor)]) {
+            image = [[UIImage imageNamed:@"iOSKit.bundle/browser-cancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else {
+            image = [UIImage imageNamed:@"iOSKit.bundle/browser-cancel-legacy"];
+        }
+
+        UIButton *button = [UIButton fkit_buttonWithImage:image];
         [button addTarget:self action:@selector(stopLoading) forControlEvents:UIControlEventTouchUpInside];
 
         self.loadItem = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -377,49 +405,58 @@
         if (self.titleToDisplay != nil) {
             self.title = self.titleToDisplay;
         } else {
-            self.title = self.webView.documentTitle;
+            self.title = self.webView.fkit_documentTitle;
         }
 
-        UIButton *button = [UIButton buttonWithImageNamed:@"iOSKit.bundle/browserRefresh"];
+        UIImage *image = nil;
+        if ([UIView instancesRespondToSelector:@selector(tintColor)]) {
+            image = [[UIImage imageNamed:@"iOSKit.bundle/browser-reload"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else {
+            image = [UIImage imageNamed:@"iOSKit.bundle/browser-reload-legacy"];
+        }
+
+        UIButton *button = [UIButton fkit_buttonWithImage:image];
         [button addTarget:self action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
 
         self.loadItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        self.loadItem.enabled = ![self.address isEqualToString:@"about:blank"];
+        self.loadItem.enabled = [self hasValidAddress];
     }
 
-    UIBarButtonItem *fixedSpaceItem = [UIBarButtonItem spaceItemWithWidth:kFKBrowserFixedSpaceItemWidth];
-    UIBarButtonItem *flexibleSpaceItem = [UIBarButtonItem flexibleSpaceItem];
+    UIBarButtonItem *fixedSpaceItem = [UIBarButtonItem fkit_spaceItemWithWidth:kFKBrowserFixedSpaceItemWidth];
+    UIBarButtonItem *flexibleSpaceItem = [UIBarButtonItem fkit_flexibleSpaceItem];
 
-    BOOL showItems = ![self.address isEqualToString:@"about:blank"] || self.customActions.count > 0;
+    BOOL showBrowserItems = [self hasValidAddress];
+    BOOL showActionItem = showBrowserItems || self.customActions.count > 0;
+    NSMutableArray *items = [NSMutableArray new];
 
-    if (showItems) {
-        if (self.hasToolbar) {
-            NSMutableArray *items = [NSMutableArray arrayWithArray:@[fixedSpaceItem, self.backItem, flexibleSpaceItem, self.forwardItem, flexibleSpaceItem, self.loadItem, flexibleSpaceItem]];
+    if (self.hasToolbar) {
+        if (showBrowserItems) {
+            [items addObjectsFromArray:@[fixedSpaceItem, self.backItem, flexibleSpaceItem, self.forwardItem, flexibleSpaceItem, self.loadItem, flexibleSpaceItem]];
+        }
+
+        if (showActionItem) {
             [items addObject:self.actionItem];
             [items addObject:fixedSpaceItem];
-            self.toolbar.items = items;
-        } else {
-            UIBarButtonItem *widerFixedSpaceItem = [UIBarButtonItem spaceItemWithWidth:35.f];
-            NSMutableArray *items = [NSMutableArray arrayWithArray:@[self.loadItem, widerFixedSpaceItem,
-                                     self.forwardItem, widerFixedSpaceItem,
-                                     self.backItem, fixedSpaceItem]];
+        }
+        self.toolbar.items = items;
+    } else {
+        UIBarButtonItem *widerFixedSpaceItem = [UIBarButtonItem fkit_spaceItemWithWidth:35.f];
 
+        if (showBrowserItems) {
+            [items addObjectsFromArray:@[self.loadItem, widerFixedSpaceItem, self.forwardItem, widerFixedSpaceItem, self.backItem, fixedSpaceItem]];
+        }
+
+        if (showActionItem) {
             [items insertObject:widerFixedSpaceItem atIndex:0];
             [items insertObject:self.actionItem atIndex:0];
+        }
 
-            [self.navigationItem setRightBarButtonItems:items];
-        }
-    } else {
-        if (self.hasToolbar) {
-            self.toolbar.items = nil;
-        } else {
-            self.navigationItem.rightBarButtonItems = nil;
-        }
+        [self.navigationItem setRightBarButtonItems:items];
     }
 }
 
 - (void)layoutForOrientation:(UIInterfaceOrientation)orientation {
-    CGFloat toolbarHeight = (self.toolbarHidden || !self.hasToolbar) ? 0.f : FKToolbarHeightForOrientation(orientation);
+    CGFloat toolbarHeight = self.toolbarHidden ? 0.f : FKBarHeightForOrientation(orientation);
 
     self.webView.frameHeight = self.view.boundsHeight - toolbarHeight;
     self.toolbar.frameTop = self.webView.frameBottom;
@@ -429,17 +466,25 @@
 - (void)customize {
     self.view.backgroundColor = self.backgroundColor;
     self.webView.scalesPageToFit = YES;
-    self.navigationController.navigationBar.tintColor = self.tintColor;
-    self.toolbar.tintColor = self.tintColor;
+
+    if ([UIToolbar instancesRespondToSelector:@selector(setBarTintColor:)]) {
+        self.navigationController.navigationBar.barTintColor = self.tintColor;
+        self.toolbar.barTintColor = self.tintColor;
+    } else {
+        self.navigationController.navigationBar.tintColor = self.tintColor;
+        self.toolbar.tintColor = self.tintColor;
+    }
 }
 
 - (void)showActionSheet {
-    NSString *actionSheetTitle = self.address;
+    NSString *actionSheetTitle = nil;
 
-    actionSheetTitle = [actionSheetTitle stringByReplacingOccurrencesOfString:@"(^http://)|(/$)"
+    if ([self hasValidAddress]) {
+        actionSheetTitle = [self.address stringByReplacingOccurrencesOfString:@"(^http://)|(/$)"
                                                                    withString:@""
                                                                       options:NSRegularExpressionSearch
                                                                         range:NSMakeRange(0, actionSheetTitle.length)];
+    }
 
     [self.actionSheet dismissWithClickedButtonIndex:-1 animated:NO];
     self.actionSheet = [[UIActionSheet alloc] initWithTitle:actionSheetTitle
@@ -448,20 +493,40 @@
                                      destructiveButtonTitle:nil
                                           otherButtonTitles:nil];
 
-    [self.actionSheet addButtonWithTitle:_(@"Open in Safari")];
+    if ([self hasValidAddress]) {
+        [self.actionSheet addButtonWithTitle:_(@"Copy Link")];
+        [self.actionSheet addButtonWithTitle:_(@"Open in Safari")];
+        if (FKInterAppChromeIsInstalled()) {
+            [self.actionSheet addButtonWithTitle:_(@"Open in Chrome")];
+        }
 
-    if ([MFMailComposeViewController canSendMail]) {
-        [self.actionSheet addButtonWithTitle:_(@"Mail Link")];
+        if ([MFMailComposeViewController canSendMail]) {
+            [self.actionSheet addButtonWithTitle:_(@"Mail Link")];
+        }
     }
 
     for (NSDictionary *action in self.customActions) {
         [self.actionSheet addButtonWithTitle:[action valueForKey:kFKCustomActionTitle]];
+
+        BOOL destructiveAction = [action[kFKCustomActionDestructive] boolValue];
+        if (destructiveAction) {
+            self.actionSheet.destructiveButtonIndex = self.actionSheet.numberOfButtons - 1;
+        }
     }
 
     [self.actionSheet addButtonWithTitle:_(@"Cancel")];
     [self.actionSheet setCancelButtonIndex:self.actionSheet.numberOfButtons - 1];
 
     [self.actionSheet showFromBarButtonItem:self.actionItem animated:YES];
+}
+
+- (void)addActionWithTitle:(NSString *)title block:(dispatch_block_t)block destructive:(BOOL)destructive {
+    if (self.customActions == nil) {
+        self.customActions = [NSMutableArray array];
+    }
+
+    NSDictionary *action = @{kFKCustomActionTitle : title, kFKCustomActionBlock: [block copy], kFKCustomActionDestructive : @(destructive)};
+    [self.customActions addObject:action];
 }
 
 - (void)handleDoneButtonPress:(id)sender {
@@ -471,6 +536,10 @@
 - (BOOL)hasToolbar {
     // we don't need a toolbar on iOS 5/iPad because we put the items in the navigationBar
     return $isPhone() || ![UINavigationItem instancesRespondToSelector:@selector(setRightBarButtonItems:)];
+}
+
+- (BOOL)hasValidAddress {
+    return ![self.address isEqualToString:@"about:blank"] && ![self.url isFileURL];
 }
 
 @end

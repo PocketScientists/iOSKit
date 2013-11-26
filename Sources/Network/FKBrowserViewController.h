@@ -12,7 +12,7 @@ typedef void(^fk_browser_fail_block)(FKBrowserViewController *browserViewControl
 /**
  This ViewController can be used to display an InApp-Browser.
  */
-@interface FKBrowserViewController : UIViewController
+@interface FKBrowserViewController : UIViewController <UIWebViewDelegate>
 
 /** The current address of the browser. You can use this to redirect the browser to the given address */
 @property (nonatomic, copy) NSString *address;
@@ -27,6 +27,7 @@ typedef void(^fk_browser_fail_block)(FKBrowserViewController *browserViewControl
 @property (nonatomic, assign) BOOL fadeAnimationEnabled;
 /** The toolbar of the browserViewController. Customizable */
 @property (nonatomic, strong, readonly) UIToolbar *toolbar;
+
 @property (nonatomic, strong, readonly) UIWebView *webView;
 /** Is the toolbar visible or hidden */
 @property (nonatomic, assign) BOOL toolbarHidden;
@@ -39,6 +40,12 @@ typedef void(^fk_browser_fail_block)(FKBrowserViewController *browserViewControl
 @property (nonatomic, copy) fk_browser_load_block didFinishLoadBlock;
 /** Block that gets executed when loading of url failed */
 @property (nonatomic, copy) fk_browser_fail_block didFailToLoadBlock;
+
+@property (nonatomic, readonly) UIBarButtonItem *backItem;
+@property (nonatomic, readonly) UIBarButtonItem *forwardItem;
+@property (nonatomic, readonly) UIBarButtonItem *loadItem;
+@property (nonatomic, readonly) UIBarButtonItem *actionItem;
+@property (nonatomic, readonly) UIActionSheet *actionSheet;
 
 /**
  Creates a FKBrowserViewController with the given Address
@@ -84,6 +91,10 @@ typedef void(^fk_browser_fail_block)(FKBrowserViewController *browserViewControl
  Adds an action to the action menu
  */
 - (void)addActionWithTitle:(NSString *)title block:(dispatch_block_t)block;
+/**
+ Same as addActionWithTitle:block: but marks the button as destructive button. Last one wins, if there are more destructive actions specified.
+ */
+- (void)addDestructiveActionWithTitle:(NSString *)title block:(dispatch_block_t)block;
 
 /** 
  Performs a javascript command and returns the result.
@@ -93,3 +104,11 @@ typedef void(^fk_browser_fail_block)(FKBrowserViewController *browserViewControl
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)command;
 
 @end
+
+
+@interface FKBrowserViewController (FKSubclass)
+
+- (void)showActionSheet;
+
+@end
+
