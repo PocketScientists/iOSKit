@@ -114,7 +114,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    [self hideLoadingIndicator];
+    [self fkit_hideLoadingIndicator];
 }
 
 ////////////////////////////////////////////////////////////////////////
