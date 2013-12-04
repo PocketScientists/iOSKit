@@ -65,4 +65,20 @@ FKLoadCategory(UIViewFKHierarchy);
     }
 }
 
+- (void)fkit_bringToFront {
+    [self.superview bringSubviewToFront:self];
+}
+
+- (void)fkit_sendToBack {
+    [self.superview sendSubviewToBack:self];
+}
+
+- (BOOL)fkit_isInFront {
+    return [self.superview.subviews indexOfObject:self] == self.superview.subviews.count - 1;
+}
+
+- (BOOL)fkit_isAtBack {
+    return [self.superview.subviews indexOfObject:self] == 0;
+}
+
 @end

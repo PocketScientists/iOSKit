@@ -22,11 +22,9 @@
 - (void)fkit_removeAllSubviews;
 
 
-- (void)bringToFront;
-- (void)sendToBack;
-- (void)bringOneLevelUp;
-- (void)sendOneLevelDown;
-- (BOOL)isInFront;
-- (BOOL)isAtBack;
+- (void)fkit_bringToFront;
+- (void)fkit_sendToBack;
+- (BOOL)fkit_isInFront;
+- (BOOL)fkit_isAtBack;
 
 @end
