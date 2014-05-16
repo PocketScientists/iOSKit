@@ -13,7 +13,7 @@
 }
 
 - (void)fkit_setContentTextSizeScaleFactor:(NSInteger)scaleFactor {
-    NSString *scaleCommand = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", scaleFactor];
+    NSString *scaleCommand = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%ld%%'", (long)scaleFactor];
 
     [self stringByEvaluatingJavaScriptFromString:scaleCommand];
 }
@@ -41,7 +41,9 @@
 }
 
 - (BOOL)fkit_displaysValidWebsite {
-    return [self stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"].length > 0;
+    return ([self stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"].length > 0 &&
+            self.request.URL != nil &&
+            ![self.request.URL.absoluteString isEqualToString:@"about:blank"]);
 }
 
 @end
