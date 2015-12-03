@@ -24,7 +24,7 @@ typedef void (^fk_draw_block)(UIView *view, CGContextRef context);
  @param block the block used for drawing
  @return a view with the given frame and drawing block
  */
-+ (id)viewWithFrame:(CGRect)frame drawingBlock:(fk_draw_block)block;
++ (instancetype)viewWithFrame:(CGRect)frame drawingBlock:(fk_draw_block)block;
 
 // Subclasses can override
 + (NSSet *)keyPathsForValuesAffectingDrawRect;

@@ -68,14 +68,14 @@ typedef void(^fk_browser_fail_block)(FKBrowserViewController *browserViewControl
  
  @param address The address the browser should display
  */
-- (id)initWithAddress:(NSString *)address;
+- (instancetype)initWithAddress:(NSString *)address;
 
 /**
  Initializes the Browser with the given URL and start loading when the viewController gets pushed.
  
  @param url The URL the browser should display
  */
-- (id)initWithURL:(NSURL *)url;
+- (instancetype)initWithURL:(NSURL *)url;
 
 /**
  Stops loading of the UIWebView
