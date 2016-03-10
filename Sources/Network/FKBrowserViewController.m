@@ -357,7 +357,7 @@
         [composer setMailComposeDelegate:self];
         [composer setMessageBody:self.address isHTML:NO];
         if (composer != nil) {
-            [self presentModalViewController:composer animated:YES];
+            [self presentViewController:composer animated:YES completion:nil];
         }
     }
 
@@ -369,7 +369,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -530,7 +530,7 @@
 }
 
 - (void)handleDoneButtonPress:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)hasToolbar {
