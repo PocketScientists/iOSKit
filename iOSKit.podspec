@@ -3,6 +3,7 @@ Pod::Spec.new do |s|
   s.name         = 'iOSKit'
   s.version      = '0.0.2'
   s.license      = 'MIT'
+  s.authors      = { 'Alex Wolf' => 'a.wolf@nousguide.com' }
   s.summary      = 'iOS Additions to FoundationKit.'
   s.homepage     = "http://foundationk.it/"
   s.source       = { :git => 'https://github.com/PocketScientists/iOSKit.git' }
