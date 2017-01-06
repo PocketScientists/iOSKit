@@ -1,8 +1,7 @@
 // Part of iOSKit http://foundationk.it
 
-#import "FKShorthands.h"
 #import "FKUniversal.h"
-#import "FKAssert.h"
+#import <FoundationKit/FoundationKit.h>
 
 /**
  Checks if two interface orientations are counterpart orientations.

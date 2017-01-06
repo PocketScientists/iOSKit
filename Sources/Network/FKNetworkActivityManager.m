@@ -1,5 +1,4 @@
 #import "FKNetworkActivityManager.h"
-#import "FKDispatch.h"
 
 static NSMutableSet *networkUsers = nil;
 

@@ -1,5 +1,4 @@
 #import "FKBrowserViewController.h"
-#import "FKShorthands.h"
 #import "UIViewController+FKLoading.h"
 #import "UIWebView+FKAdditions.h"
 #import "UIView+FKAdditions.h"
