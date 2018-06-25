@@ -1,5 +1,5 @@
 #import "UIImage+FKBlockDrawing.h"
-#import "FKSynthesizeSingleton.h"
+#import <FoundationKit/FoundationKit.h>
 
 @implementation UIImage (FKBlockDrawing)
 
