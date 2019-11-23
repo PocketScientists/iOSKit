@@ -11,7 +11,6 @@
 		391393AD13C9B84C0049DA61 /* UIApplication+FKConcise.h in Headers */ = {isa = PBXBuildFile; fileRef = 391393A213C9B84C0049DA61 /* UIApplication+FKConcise.h */; };
 		391393AF13C9B84C0049DA61 /* UIScreen+FKConcise.h in Headers */ = {isa = PBXBuildFile; fileRef = 391393A413C9B84C0049DA61 /* UIScreen+FKConcise.h */; };
 		391393B113C9B84C0049DA61 /* FKUniversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 391393A713C9B84C0049DA61 /* FKUniversal.h */; };
-		391393B413C9C1310049DA61 /* iOSKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 391393B313C9C1310049DA61 /* iOSKit.h */; settings = {ATTRIBUTES = (); }; };
 		3921679214266A060018BD5A /* UIScreen+FKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3921679014266A060018BD5A /* UIScreen+FKAdditions.h */; };
 		3921679314266A060018BD5A /* UIScreen+FKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3921679114266A060018BD5A /* UIScreen+FKAdditions.m */; };
 		3921679614266BCB0018BD5A /* UIScrollView+FKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3921679414266BCA0018BD5A /* UIScrollView+FKAdditions.h */; };
@@ -96,6 +95,25 @@
 		9BDD9264148AA9BD008E21A1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDD9263148AA9BD008E21A1 /* MessageUI.framework */; };
 		9BEF57AB17C12BCE002FACDF /* FKBlurringView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEF57A917C12BCE002FACDF /* FKBlurringView.h */; };
 		9BEF57AC17C12BCE002FACDF /* FKBlurringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF57AA17C12BCE002FACDF /* FKBlurringView.m */; };
+		A98C3E062389EE2700CBAE67 /* iOSKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A9A007EB1E2021000068A936 /* iOSKit.h */; };
+		A98C3E3D2389F02700CBAE67 /* browser-forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E2B2389F02600CBAE67 /* browser-forward@2x.png */; };
+		A98C3E3E2389F02700CBAE67 /* browser-back.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E2C2389F02700CBAE67 /* browser-back.png */; };
+		A98C3E3F2389F02700CBAE67 /* browser-action@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E2D2389F02700CBAE67 /* browser-action@2x.png */; };
+		A98C3E402389F02700CBAE67 /* browser-cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E2E2389F02700CBAE67 /* browser-cancel@2x.png */; };
+		A98C3E412389F02700CBAE67 /* browser-reload-legacy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E2F2389F02700CBAE67 /* browser-reload-legacy@2x.png */; };
+		A98C3E422389F02700CBAE67 /* browser-reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E302389F02700CBAE67 /* browser-reload@2x.png */; };
+		A98C3E432389F02700CBAE67 /* browser-forward-legacy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E312389F02700CBAE67 /* browser-forward-legacy@2x.png */; };
+		A98C3E442389F02700CBAE67 /* browser-forward-legacy.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E322389F02700CBAE67 /* browser-forward-legacy.png */; };
+		A98C3E452389F02700CBAE67 /* browser-back-legacy.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E332389F02700CBAE67 /* browser-back-legacy.png */; };
+		A98C3E462389F02700CBAE67 /* browser-action.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E342389F02700CBAE67 /* browser-action.png */; };
+		A98C3E472389F02700CBAE67 /* browser-cancel-legacy.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E352389F02700CBAE67 /* browser-cancel-legacy.png */; };
+		A98C3E482389F02700CBAE67 /* browser-cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E362389F02700CBAE67 /* browser-cancel.png */; };
+		A98C3E492389F02700CBAE67 /* browser-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E372389F02700CBAE67 /* browser-back@2x.png */; };
+		A98C3E4A2389F02700CBAE67 /* browser-reload.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E382389F02700CBAE67 /* browser-reload.png */; };
+		A98C3E4B2389F02700CBAE67 /* browser-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E392389F02700CBAE67 /* browser-forward.png */; };
+		A98C3E4C2389F02700CBAE67 /* browser-back-legacy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E3A2389F02700CBAE67 /* browser-back-legacy@2x.png */; };
+		A98C3E4D2389F02700CBAE67 /* browser-cancel-legacy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E3B2389F02700CBAE67 /* browser-cancel-legacy@2x.png */; };
+		A98C3E4E2389F02700CBAE67 /* browser-reload-legacy.png in Resources */ = {isa = PBXBuildFile; fileRef = A98C3E3C2389F02700CBAE67 /* browser-reload-legacy.png */; };
 		A9A007ED1E2021000068A936 /* iOSKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A9A007EB1E2021000068A936 /* iOSKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9A007F11E2021600068A936 /* FKiOSDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C025C142BD583006F9812 /* FKiOSDrawing.m */; };
 		A9A007F21E2021600068A936 /* FKInterApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCA532314891A5700918E87 /* FKInterApp.m */; };
@@ -196,7 +214,6 @@
 		391393A213C9B84C0049DA61 /* UIApplication+FKConcise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FKConcise.h"; sourceTree = "<group>"; };
 		391393A413C9B84C0049DA61 /* UIScreen+FKConcise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+FKConcise.h"; sourceTree = "<group>"; };
 		391393A713C9B84C0049DA61 /* FKUniversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FKUniversal.h; sourceTree = "<group>"; };
-		391393B313C9C1310049DA61 /* iOSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSKit.h; sourceTree = "<group>"; };
 		3921679014266A060018BD5A /* UIScreen+FKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScreen+FKAdditions.h"; path = "UIKit/UIScreen+FKAdditions.h"; sourceTree = "<group>"; };
 		3921679114266A060018BD5A /* UIScreen+FKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScreen+FKAdditions.m"; path = "UIKit/UIScreen+FKAdditions.m"; sourceTree = "<group>"; };
 		3921679414266BCA0018BD5A /* UIScrollView+FKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+FKAdditions.h"; path = "UIKit/UIScrollView+FKAdditions.h"; sourceTree = "<group>"; };
@@ -283,11 +300,29 @@
 		9BCBDF421472747C0074BFEB /* UIWebView+FKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+FKAdditions.m"; path = "UIKit/UIWebView+FKAdditions.m"; sourceTree = "<group>"; };
 		9BDD922D148A8FE6008E21A1 /* FKBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKBrowserViewController.h; path = Network/FKBrowserViewController.h; sourceTree = "<group>"; };
 		9BDD922E148A8FE6008E21A1 /* FKBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKBrowserViewController.m; path = Network/FKBrowserViewController.m; sourceTree = "<group>"; };
-		9BDD9232148A9AE8008E21A1 /* iOSKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = iOSKit.bundle; path = Resources/iOSKit.bundle; sourceTree = "<group>"; };
 		9BDD9263148AA9BD008E21A1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		9BE4253C14470FA40036D399 /* FKAudioFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKAudioFunctions.h; sourceTree = "<group>"; };
 		9BEF57A917C12BCE002FACDF /* FKBlurringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKBlurringView.h; path = Views/FKBlurringView.h; sourceTree = "<group>"; };
 		9BEF57AA17C12BCE002FACDF /* FKBlurringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKBlurringView.m; path = Views/FKBlurringView.m; sourceTree = "<group>"; };
+		A98C3E052389EDDF00CBAE67 /* iOSKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSKit.podspec; sourceTree = "<group>"; };
+		A98C3E2B2389F02600CBAE67 /* browser-forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-forward@2x.png"; path = "Resources/browser-forward@2x.png"; sourceTree = "<group>"; };
+		A98C3E2C2389F02700CBAE67 /* browser-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-back.png"; path = "Resources/browser-back.png"; sourceTree = "<group>"; };
+		A98C3E2D2389F02700CBAE67 /* browser-action@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-action@2x.png"; path = "Resources/browser-action@2x.png"; sourceTree = "<group>"; };
+		A98C3E2E2389F02700CBAE67 /* browser-cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-cancel@2x.png"; path = "Resources/browser-cancel@2x.png"; sourceTree = "<group>"; };
+		A98C3E2F2389F02700CBAE67 /* browser-reload-legacy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-reload-legacy@2x.png"; path = "Resources/browser-reload-legacy@2x.png"; sourceTree = "<group>"; };
+		A98C3E302389F02700CBAE67 /* browser-reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-reload@2x.png"; path = "Resources/browser-reload@2x.png"; sourceTree = "<group>"; };
+		A98C3E312389F02700CBAE67 /* browser-forward-legacy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-forward-legacy@2x.png"; path = "Resources/browser-forward-legacy@2x.png"; sourceTree = "<group>"; };
+		A98C3E322389F02700CBAE67 /* browser-forward-legacy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-forward-legacy.png"; path = "Resources/browser-forward-legacy.png"; sourceTree = "<group>"; };
+		A98C3E332389F02700CBAE67 /* browser-back-legacy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-back-legacy.png"; path = "Resources/browser-back-legacy.png"; sourceTree = "<group>"; };
+		A98C3E342389F02700CBAE67 /* browser-action.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-action.png"; path = "Resources/browser-action.png"; sourceTree = "<group>"; };
+		A98C3E352389F02700CBAE67 /* browser-cancel-legacy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-cancel-legacy.png"; path = "Resources/browser-cancel-legacy.png"; sourceTree = "<group>"; };
+		A98C3E362389F02700CBAE67 /* browser-cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-cancel.png"; path = "Resources/browser-cancel.png"; sourceTree = "<group>"; };
+		A98C3E372389F02700CBAE67 /* browser-back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-back@2x.png"; path = "Resources/browser-back@2x.png"; sourceTree = "<group>"; };
+		A98C3E382389F02700CBAE67 /* browser-reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-reload.png"; path = "Resources/browser-reload.png"; sourceTree = "<group>"; };
+		A98C3E392389F02700CBAE67 /* browser-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-forward.png"; path = "Resources/browser-forward.png"; sourceTree = "<group>"; };
+		A98C3E3A2389F02700CBAE67 /* browser-back-legacy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-back-legacy@2x.png"; path = "Resources/browser-back-legacy@2x.png"; sourceTree = "<group>"; };
+		A98C3E3B2389F02700CBAE67 /* browser-cancel-legacy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-cancel-legacy@2x.png"; path = "Resources/browser-cancel-legacy@2x.png"; sourceTree = "<group>"; };
+		A98C3E3C2389F02700CBAE67 /* browser-reload-legacy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-reload-legacy.png"; path = "Resources/browser-reload-legacy.png"; sourceTree = "<group>"; };
 		A9A007E91E2021000068A936 /* iOSKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A007EB1E2021000068A936 /* iOSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSKit.h; sourceTree = "<group>"; };
 		A9A007EC1E2021000068A936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -325,7 +360,6 @@
 		3913939A13C9B84C0049DA61 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				391393B313C9C1310049DA61 /* iOSKit.h */,
 				9B54E80E14269B5500336F08 /* Core */,
 				9BCA5321148919C800918E87 /* Communication */,
 				39DF5D741424B5EC00090805 /* Network */,
@@ -405,6 +439,7 @@
 		39F5165413C8E3F2008A9732 = {
 			isa = PBXGroup;
 			children = (
+				A98C3E052389EDDF00CBAE67 /* iOSKit.podspec */,
 				A9A3692C20E1629E00BD30AC /* Cartfile */,
 				3913939A13C9B84C0049DA61 /* Sources */,
 				39F5166513C8E3F3008A9732 /* Supporting Files */,
@@ -548,7 +583,24 @@
 		9BDD9231148A9A1F008E21A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9BDD9232148A9AE8008E21A1 /* iOSKit.bundle */,
+				A98C3E342389F02700CBAE67 /* browser-action.png */,
+				A98C3E2D2389F02700CBAE67 /* browser-action@2x.png */,
+				A98C3E332389F02700CBAE67 /* browser-back-legacy.png */,
+				A98C3E3A2389F02700CBAE67 /* browser-back-legacy@2x.png */,
+				A98C3E2C2389F02700CBAE67 /* browser-back.png */,
+				A98C3E372389F02700CBAE67 /* browser-back@2x.png */,
+				A98C3E352389F02700CBAE67 /* browser-cancel-legacy.png */,
+				A98C3E3B2389F02700CBAE67 /* browser-cancel-legacy@2x.png */,
+				A98C3E362389F02700CBAE67 /* browser-cancel.png */,
+				A98C3E2E2389F02700CBAE67 /* browser-cancel@2x.png */,
+				A98C3E322389F02700CBAE67 /* browser-forward-legacy.png */,
+				A98C3E312389F02700CBAE67 /* browser-forward-legacy@2x.png */,
+				A98C3E392389F02700CBAE67 /* browser-forward.png */,
+				A98C3E2B2389F02600CBAE67 /* browser-forward@2x.png */,
+				A98C3E3C2389F02700CBAE67 /* browser-reload-legacy.png */,
+				A98C3E2F2389F02700CBAE67 /* browser-reload-legacy@2x.png */,
+				A98C3E382389F02700CBAE67 /* browser-reload.png */,
+				A98C3E302389F02700CBAE67 /* browser-reload@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -574,7 +626,6 @@
 				9BA2D01F182AA87C003ACAD4 /* FKHairlineView.h in Headers */,
 				391393AF13C9B84C0049DA61 /* UIScreen+FKConcise.h in Headers */,
 				391393B113C9B84C0049DA61 /* FKUniversal.h in Headers */,
-				391393B413C9C1310049DA61 /* iOSKit.h in Headers */,
 				39CFA5EF1422348700DC3E57 /* UIColor+FKAdditions.h in Headers */,
 				39CFA5F3142234A600DC3E57 /* UIView+FKRotation.h in Headers */,
 				39CFA5F71422398E00DC3E57 /* UIDevice+FKAdditions.h in Headers */,
@@ -582,6 +633,7 @@
 				39CFA5FF14223CBE00DC3E57 /* UIScrollView+FKContentSize.h in Headers */,
 				39CFA6091422423500DC3E57 /* UIView+FKHierarchy.h in Headers */,
 				39CFA60D1422437500DC3E57 /* UIView+FKAdditions.h in Headers */,
+				A98C3E062389EE2700CBAE67 /* iOSKit.h in Headers */,
 				39CFA61114224AF800DC3E57 /* UIView+FKAnimations.h in Headers */,
 				9B527AF118E461A300F14C5A /* UIResponder+FKFirstResponder.h in Headers */,
 				39ACE7441422709B0022D8F8 /* UIView+FKContentSize.h in Headers */,
@@ -720,7 +772,7 @@
 		39F5165613C8E3F2008A9732 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
 				TargetAttributes = {
 					A9A007E81E2021000068A936 = {
@@ -731,10 +783,11 @@
 			};
 			buildConfigurationList = 39F5165913C8E3F2008A9732 /* Build configuration list for PBXProject "iOSKit" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 39F5165413C8E3F2008A9732;
 			productRefGroup = 39F5166013C8E3F3008A9732 /* Products */;
@@ -752,6 +805,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A98C3E4B2389F02700CBAE67 /* browser-forward.png in Resources */,
+				A98C3E3D2389F02700CBAE67 /* browser-forward@2x.png in Resources */,
+				A98C3E402389F02700CBAE67 /* browser-cancel@2x.png in Resources */,
+				A98C3E472389F02700CBAE67 /* browser-cancel-legacy.png in Resources */,
+				A98C3E4E2389F02700CBAE67 /* browser-reload-legacy.png in Resources */,
+				A98C3E4A2389F02700CBAE67 /* browser-reload.png in Resources */,
+				A98C3E3F2389F02700CBAE67 /* browser-action@2x.png in Resources */,
+				A98C3E482389F02700CBAE67 /* browser-cancel.png in Resources */,
+				A98C3E412389F02700CBAE67 /* browser-reload-legacy@2x.png in Resources */,
+				A98C3E422389F02700CBAE67 /* browser-reload@2x.png in Resources */,
+				A98C3E452389F02700CBAE67 /* browser-back-legacy.png in Resources */,
+				A98C3E462389F02700CBAE67 /* browser-action.png in Resources */,
+				A98C3E4C2389F02700CBAE67 /* browser-back-legacy@2x.png in Resources */,
+				A98C3E442389F02700CBAE67 /* browser-forward-legacy.png in Resources */,
+				A98C3E432389F02700CBAE67 /* browser-forward-legacy@2x.png in Resources */,
+				A98C3E3E2389F02700CBAE67 /* browser-back.png in Resources */,
+				A98C3E492389F02700CBAE67 /* browser-back@2x.png in Resources */,
+				A98C3E4D2389F02700CBAE67 /* browser-cancel-legacy@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,6 +930,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
@@ -897,7 +969,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "FoundationKit/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -907,6 +979,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
@@ -937,7 +1010,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "FoundationKit/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1002,7 +1075,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = iOSKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.nousdigital.iOSKit;
@@ -1049,7 +1122,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = iOSKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.nousdigital.iOSKit;
