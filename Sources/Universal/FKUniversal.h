@@ -1,6 +1,6 @@
 // Part of iOSKit http://foundationk.it
 
-#import "UIDevice+FKAdditions.h"
+#import <iOSKit/UIDevice+FKAdditions.h>
 
 
 ////////////////////////////////////////////////////////////////////////

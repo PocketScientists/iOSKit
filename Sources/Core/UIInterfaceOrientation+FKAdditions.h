@@ -1,6 +1,6 @@
 // Part of iOSKit http://foundationk.it
 
-#import "FKUniversal.h"
+#import <iOSKit/FKUniversal.h>
 #import <FoundationKit/FoundationKit.h>
 
 /**

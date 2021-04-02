@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -202,7 +202,7 @@
 		A9A008451E2021950068A936 /* FKBlurringView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEF57A917C12BCE002FACDF /* FKBlurringView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9A008461E2021950068A936 /* FKHairlineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA2D01D182AA87C003ACAD4 /* FKHairlineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9A008471E2021950068A936 /* FKView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B45437714953EF90076A950 /* FKView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9A3693720E163B700BD30AC /* FoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3693620E163B700BD30AC /* FoundationKit.framework */; };
+		A9B832C8261730CE00B20CE1 /* FoundationKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B832C7261730CE00B20CE1 /* FoundationKit.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D40800BE1844BE520071E67C /* FKTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D40800BA1844BE520071E67C /* FKTableViewCell.h */; };
 		D40800BF1844BE520071E67C /* FKTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D40800BB1844BE520071E67C /* FKTableViewCell.m */; };
 		D40800C01844BE520071E67C /* FKTableViewCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = D40800BC1844BE520071E67C /* FKTableViewCellView.h */; };
@@ -327,7 +327,7 @@
 		A9A007EB1E2021000068A936 /* iOSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSKit.h; sourceTree = "<group>"; };
 		A9A007EC1E2021000068A936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9A3692C20E1629E00BD30AC /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		A9A3693620E163B700BD30AC /* FoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationKit.framework; path = Carthage/Build/iOS/FoundationKit.framework; sourceTree = "<group>"; };
+		A9B832C7261730CE00B20CE1 /* FoundationKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FoundationKit.xcframework; path = Carthage/Build/FoundationKit.xcframework; sourceTree = "<group>"; };
 		D40800BA1844BE520071E67C /* FKTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKTableViewCell.h; path = TableView/FKTableViewCell.h; sourceTree = "<group>"; };
 		D40800BB1844BE520071E67C /* FKTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKTableViewCell.m; path = TableView/FKTableViewCell.m; sourceTree = "<group>"; };
 		D40800BC1844BE520071E67C /* FKTableViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKTableViewCellView.h; path = TableView/FKTableViewCellView.h; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9A3693720E163B700BD30AC /* FoundationKit.framework in Frameworks */,
+				A9B832C8261730CE00B20CE1 /* FoundationKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +462,7 @@
 		39F5166113C8E3F3008A9732 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A9A3693620E163B700BD30AC /* FoundationKit.framework */,
+				A9B832C7261730CE00B20CE1 /* FoundationKit.xcframework */,
 				393A2999142359550056CB37 /* CoreGraphics.framework */,
 				39F5166213C8E3F3008A9732 /* Foundation.framework */,
 				9BDD9263148AA9BD008E21A1 /* MessageUI.framework */,
@@ -772,7 +772,7 @@
 		39F5165613C8E3F2008A9732 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
 				TargetAttributes = {
 					A9A007E81E2021000068A936 = {
@@ -940,6 +940,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
@@ -969,7 +970,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "FoundationKit/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -989,6 +990,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
@@ -1010,7 +1012,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "FoundationKit/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1022,7 +1024,7 @@
 				DSTROOT = /tmp/iOSKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Sources/Prefix.pch;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1035,7 +1037,7 @@
 				DSTROOT = /tmp/iOSKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Sources/Prefix.pch;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1075,8 +1077,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = iOSKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.nousdigital.iOSKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1122,8 +1128,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = iOSKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.nousdigital.iOSKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

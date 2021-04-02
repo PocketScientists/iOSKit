@@ -3,7 +3,7 @@
 // Derived from Lore Brichter's BSD-licensed ABTableViewCell: http://blog.atebits.com/2008/12/fast-scrolling-in-tweetie-with-uitableview/
 
 #import <UIKit/UIKit.h>
-#import "UITableViewCell+FKConcise.h"
+#import <iOSKit/UITableViewCell+FKConcise.h>
 
 /**
  This class is a base-class for a very fast, custom-drawn UITableViewCell.

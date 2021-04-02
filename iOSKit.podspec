@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.platform     = :ios, '11.0'
   s.name         = 'iOSKit'
-  s.version      = '1.0.2'
+  s.version      = '1.0.3'
   s.license      = 'MIT'
   s.authors      = { 'Alex Wolf' => 'a.wolf@nousguide.com' }
   s.summary      = 'iOS Additions to FoundationKit.'

@@ -20,22 +20,31 @@ BOOL FKInterAppOpenApplicationWithPath(NSString *appScheme, NSString *appPath) {
         if (appPath != nil) {
             urlPath = [urlPath stringByAppendingFormat:@"%@", appPath];
         }
-        
-        return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath]];
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlPath]]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath] options:@{} completionHandler:nil];
+            return YES;
+        }
     }
     
     return NO;
 }
 
 BOOL FKInterAppOpenSafari(NSURL *url) {
-    return [[UIApplication sharedApplication] openURL:url];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        return YES;
+    }
+    return NO;
 }
 
 BOOL FKInterAppOpenPhone(NSString *phoneNumber) {
     if (phoneNumber != nil) {
         NSString *appScheme = [kFKInterAppSchemePhone stringByAppendingString:[phoneNumber fkit_sanitizedPhoneNumber]];
       
-        return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appScheme]];
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:appScheme]]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appScheme] options:@{} completionHandler:nil];
+            return YES;
+        }
     }
     
     return NO;
@@ -45,7 +54,10 @@ BOOL FKInterAppOpenMessages(NSString *phoneNumber) {
     if (phoneNumber != nil) {
         NSString *appScheme = [kFKInterAppSchemeMessages stringByAppendingString:[phoneNumber fkit_sanitizedPhoneNumber]];
         
-        return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appScheme]];
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:appScheme]]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appScheme] options:@{} completionHandler:nil];
+            return YES;
+        }
     }
     
     return NO;
@@ -54,19 +66,31 @@ BOOL FKInterAppOpenMessages(NSString *phoneNumber) {
 BOOL FKInterAppOpenYouTube(NSString *videoID) {
     NSString *urlPath = [@"http://www.youtube.com/watch?v=" stringByAppendingString:videoID];
    
-    return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlPath]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath] options:@{} completionHandler:nil];
+        return YES;
+    }
+    return NO;
 }
 
 BOOL FKInterAppOpenAppStore(NSString *appID) {
     NSString* urlPath = [@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=" stringByAppendingString:appID];
     
-    return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlPath]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath] options:@{} completionHandler:nil];
+        return YES;
+    }
+    return NO;
 }
 
 BOOL FKInterAppOpenAppStoreReview(NSString *appID) {
     NSString* urlPath = [@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" stringByAppendingString:appID];
     
-    return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlPath]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlPath] options:@{} completionHandler:nil];
+        return YES;
+    }
+    return NO;
 }
 
 BOOL FKInterAppChromeIsInstalled(void) {
@@ -101,7 +125,11 @@ BOOL __attribute__((overloadable)) FKInterAppOpenChrome(NSURL *URL, NSURL *callb
             }
 
             NSURL *chromeURL = [NSURL URLWithString:chromeURLString];
-            return [[UIApplication sharedApplication] openURL:chromeURL];
+            if ([[UIApplication sharedApplication] canOpenURL:chromeURL]) {
+                [[UIApplication sharedApplication] openURL:chromeURL options:@{} completionHandler:nil];
+                return YES;
+            }
+            return NO;
         }
     } else if ([[UIApplication sharedApplication] canOpenURL:chromeSimpleURL]) {
         NSString *scheme = [URL.scheme lowercaseString];
@@ -121,7 +149,11 @@ BOOL __attribute__((overloadable)) FKInterAppOpenChrome(NSURL *URL, NSURL *callb
             NSString *chromeURLString = [chromeScheme stringByAppendingString:urlNoScheme];
             NSURL *chromeURL = [NSURL URLWithString:chromeURLString];
 
-            return [[UIApplication sharedApplication] openURL:chromeURL];
+            if ([[UIApplication sharedApplication] canOpenURL:chromeURL]) {
+                [[UIApplication sharedApplication] openURL:chromeURL options:@{} completionHandler:nil];
+                return YES;
+            }
+            return NO;
         }
     }
 

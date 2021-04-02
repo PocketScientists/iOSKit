@@ -2,7 +2,7 @@
 //
 // Derived from Peter Jihoon Kim's MIT-licensed ConciseKit: https://github.com/petejkim/ConciseKit
 
-#import "UIApplication+FKConcise.h"
+#import <iOSKit/UIApplication+FKConcise.h>
 
 #define $screen            [UIScreen mainScreen]
 #define $screenBounds      $screen.bounds

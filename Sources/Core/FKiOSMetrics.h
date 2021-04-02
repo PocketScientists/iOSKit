@@ -1,7 +1,7 @@
 // Part of iOSKit http://foundationk.it
 
-#import "UIApplication+FKConcise.h"
-#import "FKUniversal.h"
+#import <iOSKit/UIApplication+FKConcise.h>
+#import <iOSKit/FKUniversal.h>
 
 
 NS_INLINE CGFloat FKBarHeightForOrientation(UIInterfaceOrientation orientation) {
